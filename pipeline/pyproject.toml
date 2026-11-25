@@ -1,0 +1,39 @@
+[project]
+name = "jangada-pipeline"
+version = "0.1.0"
+description = "NASA FIRMS hotspots (MODIS + VIIRS) to a harmonized burning activity calendar"
+license = "Apache-2.0"
+requires-python = ">=3.12"
+dependencies = [
+    "duckdb>=2.0.0",
+]
+
+[project.scripts]
+jangada-check = "jangada.check_access:main"
+jangada-probe = "jangada.probe_api:main"
+jangada-download = "jangada.download:main"
+jangada-aggregate = "jangada.aggregate:main"
+jangada-regions = "jangada.regions:main"
+jangada-harmonize = "jangada.harmonize:main"
+jangada-strata = "jangada.strata:main"
+jangada-export-web = "jangada.export_web:main"
+jangada-municipalities = "jangada.municipalities:main"
+jangada-extras = "jangada.extras:main"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/jangada"]
+
+[dependency-groups]
+dev = [
+    "pytest>=9.2.0",
+    "pytest-cov>=5.0",
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]
+addopts = "-q"
